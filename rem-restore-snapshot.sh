@@ -18,10 +18,10 @@ fi
 # CONFIGURATION VARIABLES                                                                            #
 #----------------------------------------------------------------------------------------------------#
 
-data_folder="/root/data"
-log_file="/root/remnode.log"
-config_folder="/root/config"
-create_snapshot_folder="/root/data/snapshots"
+data_folder=/root/data
+log_file=/root/remnode.log
+config_folder=/root/config
+create_snapshot_folder=/root/data/snapshots
 
 #----------------------------------------------------------------------------------------------------#
 # MAIN PART OF THE SCRIPT                                                                            #
