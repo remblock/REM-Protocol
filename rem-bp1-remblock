@@ -79,10 +79,10 @@ sudo snap install canonical-livepatch
 sudo snap install --classic certbot
 
 #----------------------------------------------------------------------------------------------------#
-# FETCHING ORE PROTOCOL GENESIS.JSON AND SNAPSHOT                                                    #
+# FETCHING REM PROTOCOL GENESIS.JSON AND SNAPSHOT                                                    #
 #----------------------------------------------------------------------------------------------------#
 
-wget https://raw.githubusercontent.com/Open-Rights-Exchange/ore-bp-docs/master/config-templates/genesis.json
+wget https://remchain.remme.io/genesis.json
 wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-snapshot.sh
 
 #----------------------------------------------------------------------------------------------------#
@@ -269,8 +269,8 @@ sudo chmod +x /etc/rc.local
 # INSTALLING REMCHAIN PROTOCOL BINARIES                                                              #
 #----------------------------------------------------------------------------------------------------#
 
-wget https://github.com/eosio/eos/releases/download/v2.0.7/eosio_2.0.7-1-ubuntu-18.04_amd64.deb
-sudo apt install ./eosio_2.0.7-1-ubuntu-18.04_amd64.deb -y
+wget https://github.com/Remmeauth/remprotocol/releases/download/0.4.2/remprotocol_0.4.2.amd64.deb
+sudo apt install ./remprotocol_0.4.2.amd64.deb -y
 
 #----------------------------------------------------------------------------------------------------#
 # RESTORING FROM SNAPSHOT                                                                            #
