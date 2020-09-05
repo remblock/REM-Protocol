@@ -292,7 +292,7 @@ remcli wallet create -n $wallet_name --file $wallet_name
 rm /root/rem-peer-list.ini
 rm /root/rem-bp1-remblock.sh
 rm /root/rem-restore-snapshot.sh
-rm /root/eosio_2.0.7-1-ubuntu-18.04_amd64.deb
+rm /root/remprotocol_0.4.2.amd64.deb
 
 #----------------------------------------------------------------------------------------------------#
 # ADDING SSH PUBLIC KEY TO SERVER                                                                    #
