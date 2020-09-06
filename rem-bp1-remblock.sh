@@ -28,7 +28,7 @@ contact=contact@remblock.io
 blocks_dir=/root/data/blocks
 new_hostname=rem-bp1-remblock
 create_config_dir=/root/config
-nodeos_log_file=/root/nodeos.log
+remnode_log_file=/root/remnode.log
 config_file=/root/config/config.ini
 create_snapshot_dir=/root/data/snapshots
 bp_public_key=EOS8em2a1NeNUFtwd8ZC2VzjkUXuHf3b6wPVTFEqocvRFVvd9FFmS
@@ -119,7 +119,7 @@ echo -e "\nplugin = eosio::net_plugin\nplugin = eosio::http_plugin\nplugin = eos
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# CONFIG SETTINGS                                                              #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc-enable = false\npause-on-startup = false\nwasm-runtime = eos-vm-jit\nmax-transaction-time = 30\nhttp-validate-host = false\nverbose-http-errors = true\nkeosd-provider-timeout = 5\ntxn-reference-block-lag = 0\neos-vm-oc-compile-threads = 8\nconnection-cleanup-period = 30\nchain-state-db-size-mb = 100480\nenable-stale-production = false\nmax-irreversible-block-age = -1\nhttp-server-address = 0.0.0.0:8888\nhttps-server-address = 0.0.0.0:443\np2p-listen-endpoint = 0.0.0.0:9876\nreversible-blocks-db-size-mb = 10480\n" >> $config_file
+echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc-enable = false\npause-on-startup = false\nwasm-runtime = eos-vm-jit\nmax-transaction-time = 30\nhttp-validate-host = false\nverbose-http-errors = true\ntxn-reference-block-lag = 0\neos-vm-oc-compile-threads = 8\nconnection-cleanup-period = 30\nchain-state-db-size-mb = 100480\nenable-stale-production = false\nmax-irreversible-block-age = -1\nhttp-server-address = 0.0.0.0:8888\nhttps-server-address = 0.0.0.0:443\np2p-listen-endpoint = 0.0.0.0:9876\nreversible-blocks-db-size-mb = 10480\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# PRODUCER SETTINGS                                                            #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
