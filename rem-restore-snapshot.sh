@@ -55,7 +55,7 @@ echo ""
 echo "================================"
 echo "REM-RESTORE-SNAPSHOT HAS STARTED"
 echo "================================"
-latest_snapshot=$(curl -s https://geordier.co.uk/snapshots/latestsnapshot.php)
+latest_snapshot=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php | awk '{print $3}')
 echo ""
 echo "Downloading Snapshot now..."
 echo ""
