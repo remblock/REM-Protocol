@@ -74,11 +74,6 @@ rm -rf $blocks_folder
 rm -rf $state_folder
 cd ~
 remnode --config-dir $config_folder/ --data-dir $data_folder/ --snapshot $bin_file >> $log_file 2>&1 &
-echo ""
-echo "==================================="
-echo "ORE PROTOCOL SNAPSHOT HAS COMPLETED"
-echo "==================================="
-echo ""
 sleep 4
 while [ : ]
 do
