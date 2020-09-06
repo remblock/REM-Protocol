@@ -1,18 +1,8 @@
 #!/bin/bash
 
 #****************************************************************************************************#
-#                                         REM-RESTORE-SNAPSHOT                                       #
+#                                        REM-RESTORE-SNAPSHOT                                        #
 #****************************************************************************************************#
-
-#----------------------------------------------------------------------------------------------------#
-# IF THE USER HAS NO ROOT PERMISSIONS THE SCRIPT WILL EXIT                                           #
-#----------------------------------------------------------------------------------------------------#
-
-if (($EUID!=0))
-then
-  echo "You must be root to run this script" 2>&1
-  exit 1
-fi
 
 #----------------------------------------------------------------------------------------------------#
 # CONFIGURATION VARIABLES                                                                            #
@@ -21,38 +11,74 @@ fi
 data_folder=/root/data
 log_file=/root/remnode.log
 config_folder=/root/config
-create_snapshot_folder=/root/data/snapshots
-
-#----------------------------------------------------------------------------------------------------#
-# MAIN PART OF THE SCRIPT                                                                            #
-#----------------------------------------------------------------------------------------------------#
-
-if [ ! -d "$create_snapshot_folder" ]
-then
-  mkdir -p "$create_snapshot_folder"
-  cp -p "$0" "$create_snapshot_folder"
-fi
-blocks_folder=$data_folder/blocks
 state_folder=$data_folder/state
-rm -f *.bin
-latest_snapshot=$(curl -s https://geordier.co.uk/snapshots/latestsnapshot.php)
-wget -c https://www.geordier.co.uk/snapshots/$latest_snapshot -O - | sudo tar -xz --strip=4
-bin_file=$create_snapshot_folder/*.bin
+blocks_folder=$data_folder/blocks
+snapshots_folder=$data_folder/snapshots
+
+#----------------------------------------------------------------------------------------------------#
+# INSTALLING CURL                                                                                    #
+#----------------------------------------------------------------------------------------------------#
+
+sudo apt install curl -y
+
+#----------------------------------------------------------------------------------------------------#
+# CREATE SNAPSHOT FOLDER IN DATA                                                                     #
+#----------------------------------------------------------------------------------------------------#
+
+if [ ! -d $snapshots_folder ]
+then
+  mkdir $snapshots_folder
+fi
+
+rm $snapshots_folder/*.bin 2> /dev/null
+
+#----------------------------------------------------------------------------------------------------#
+# GRACEFULLY STOP ORE-PROTOCOL                                                                       #
+#----------------------------------------------------------------------------------------------------#
+
 remnode_pid=$(pgrep remnode)
 if [ ! -z "$remnode_pid" ]
 then
-  if ps -p $remnode_pid > /dev/null
-  then
-    kill -SIGINT $remnode_pid
+  if ps -p $remnode_pid > /dev/null; then
+     kill -SIGINT $remnode_pid
   fi
   while ps -p $remnode_pid > /dev/null; do
   sleep 1
   done
 fi
-rm -rf $blocks_folder*/
+
+#----------------------------------------------------------------------------------------------------#
+# MAIN PART OF THE SCRIPT                                                                            #
+#----------------------------------------------------------------------------------------------------#
+
+echo ""
+echo "================================"
+echo "REM-RESTORE-SNAPSHOT HAS STARTED"
+echo "================================"
+latest_snapshot=$(curl -s https://geordier.co.uk/snapshots/latestsnapshot.php)
+echo ""
+echo "Downloading Snapshot now..."
+echo ""
+curl -O https://www.geordier.co.uk/snapshots/$latest_snapshot
+echo ""
+echo "Downloaded $latest_snapshot"
+gunzip $latest_snapshot
+tar_file=$(ls *.tar | head -1)
+sudo tar -xvf $tar_file
+rm $tar_file
+mv /root/root/data/snapshots/*.bin $snapshots_folder/
+bin_file=$snapshots_folder/*.bin
+echo ""
+echo "Uncompressed $latest_snapshot"
+rm -rf $blocks_folder
 rm -rf $state_folder
 cd ~
-remnode --config-dir $config_folder --snapshot $bin_file --data-dir $data_folder >> $log_file 2>&1 &
+nodeos --config-dir $config_folder/ --data-dir $data_folder/ --snapshot $bin_file >> $log_file 2>&1 &
+echo ""
+echo "==================================="
+echo "ORE PROTOCOL SNAPSHOT HAS COMPLETED"
+echo "==================================="
+echo ""
 sleep 4
 while [ : ]
 do
