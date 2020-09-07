@@ -31,6 +31,10 @@ create_config_dir=/root/config
 remnode_log_file=/root/remnode.log
 config_file=/root/config/config.ini
 create_snapshot_dir=/root/data/snapshots
+infura_link=
+cryptocompare=
+bp_swap_key=
+bp_oracle_key=
 bp_public_key=EOS69CWuLnr9T1yvj1fQHy9sgTr2g7s87Xx2oKvnRR2kV6Dvsanxu
 bp_private_key=
 ssh_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5govVMkNP5HyBQ+DBWSbUe97qyKVzoI5s1lR+x1HCSdetS8dacN6e86eWaWNUQBBr6O0AttbXULqxvOBNF1GzWFw0T1jFr9lCtuz2Y06KGjJBHRHXopeSp6VHJr+BG4Q4l9fzguYO/EmQf9Y48eCXCs4eFkKE6mFlfGkNvRInpz6bbRvwYOFEEKiTyLXE6y1910dVrgLTd2P1kyh88aCwuF4GnexM4AsipzKpSCR3/s/gqxK4YpW8KsMBCdcQMYHZ2dgxoscudcp2l88hgnQJOriYOfjAnXSKttaGNRsER/hEcKGKJsRPELJZLCn+Ahv322GTsnTRMvipfXUtDqoTdpteM5lSz+GlUe6get+O501kTz9xF9aMK7fJdj264mzj8JfvxKsZFKfsDJvTkoIV8GPdzSk5fYr8W+lFzrNXKqHBeR8+WXdVYKIq8l6Y3NOCUcf6I+kYeHPKOAqkl8mSue2Q9GPGTn8z3tAg1ASuNxFQCqhcDCyF4RcZzVMfTO6tTe56Udt/mOr2QRb6C8+wI4YK9l6Un+S6MLAt1EQZyHEm/uI0Cv4SIvh2X4ksZLEgNNAcw63MxEOLnUiGacrhKG1v4qixtjaZITkc0M518J43FK8157q0DJwbMDQCOLCWyqoytRYNhfdNvTc6sefJBJOMqKbUwGxvrZue9T6BnQ== root@REMBLOCK"
@@ -115,15 +119,15 @@ function get_user_answer_yn(){
 echo -e "#------------------------------------------------------------------------------#" > $config_file
 echo -e "# EOSIO PLUGINS                                                                #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nplugin = eosio::net_plugin\nplugin = eosio::http_plugin\nplugin = eosio::chain_plugin\nplugin = eosio::net_api_plugin\nplugin = eosio::producer_plugin\nplugin = eosio::chain_api_plugin\n" >> $config_file
+echo -e "\nplugin = eosio::net_plugin\nplugin = eosio::http_plugin\nplugin = eosio::chain_plugin\nplugin = eosio::net_api_plugin\nplugin = eosio::producer_plugin\nplugin = eosio::eth_swap_plugin\nplugin = eosio::chain_api_plugin\nplugin = eosio::rem_oracle_plugin\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# CONFIG SETTINGS                                                              #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc-enable = false\npause-on-startup = false\nwasm-runtime = eos-vm-jit\nmax-transaction-time = 30\nhttp-validate-host = false\nverbose-http-errors = true\ntxn-reference-block-lag = 0\neos-vm-oc-compile-threads = 8\nconnection-cleanup-period = 30\nchain-state-db-size-mb = 100480\nenable-stale-production = false\nmax-irreversible-block-age = -1\nhttp-server-address = 0.0.0.0:8888\nhttps-server-address = 0.0.0.0:443\np2p-listen-endpoint = 0.0.0.0:9876\nreversible-blocks-db-size-mb = 10480\n" >> $config_file
+echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc-enable = false\npause-on-startup = false\nwasm-runtime = eos-vm-jit\nmax-transaction-time = 30\nhttp-validate-host = false\nverbose-http-errors = true\ntxn-reference-block-lag = 0\neos-vm-oc-compile-threads = 8\nconnection-cleanup-period = 30\nchain-state-db-size-mb = 100480\nenable-stale-production = false\nmax-irreversible-block-age = -1\nhttp-server-address = 0.0.0.0:8888\nhttps-server-address = 0.0.0.0:443\np2p-listen-endpoint = 0.0.0.0:9876\nreversible-blocks-db-size-mb = 10480\neth-https-provider = $infura_link\ncryptocompare-apikey = $cryptocompare\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# PRODUCER SETTINGS                                                            #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nproducer-name = $producer\nsignature-provider = $bp_public_key=KEY:$bp_private_key\n" >> $config_file
+echo -e "\nproducer-name = $producer\nswap-authority = $producer@producer\noracle-authority = $producer@producer\nswap-signing-key = $bp_swap_key\noracle-signing-key = $bp_oracle_key\nsignature-provider = $bp_public_key=KEY:$bp_private_key\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# REM PROTOCOL P2P PEER ADDRESSES                                              #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#\n" >> $config_file
