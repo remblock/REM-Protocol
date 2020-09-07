@@ -1,5 +1,9 @@
 #!/bin/bash
 
+#****************************************************************************************************#
+#                                        REM-NODE-MONITOR                                            #
+#****************************************************************************************************#
+
 function remnodelogtime_to_date() {
   temp_date="$( echo $1 | awk -F '.' '{ print $1}' | tr '-' '/' | tr 'T' ' ')"
   echo $(date "+%s" -d "$temp_date")
@@ -7,9 +11,9 @@ function remnodelogtime_to_date() {
 
 second_date=$(date +%s)
 
-#-----------------------------------------------------------------------------------------------------
-# CHECK BLOCK CONDITION
-#-----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------#
+# CHECK BLOCK CONDITION                                                                              #
+#----------------------------------------------------------------------------------------------------#
 
 last_remcli_block_date=$(remcli -u https://remchain.remme.io get table rem rem producers -L remblock21bp -U remblock21bp | grep 'last_block_time' | awk '{print $2}' | tr -d '"' | tr -d ',')
 last_block=$(remnodelogtime_to_date "$last_remcli_block_date")
@@ -22,9 +26,9 @@ else
   curl -s -X POST https://api.telegram.org/bot711425317:AAG5nKmZarIlFwhOLSlLN5tYxpKNxTu9iYo/sendMessage -d chat_id=704178267 -d text="Warning: Stopped producing blocks $block_minute minutes ago." &>/dev/null
 fi
 
-#-----------------------------------------------------------------------------------------------------
-# CHECK ORACLE CONDITION
-#-----------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------#
+# CHECK ORACLE CONDITION                                                                             #
+#----------------------------------------------------------------------------------------------------#
 
 last_oracle_date=$(remcli -u https://remchain.remme.io get table rem.oracle rem.oracle pricedata -L remblock21bp -U remblock21bp | grep 'last_update' | awk '{print $2}' | tr -d '"')
 last_oracle=$(remnodelogtime_to_date "$last_oracle_date")
