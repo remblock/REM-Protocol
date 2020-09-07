@@ -97,7 +97,6 @@ do
 	echo ""
 	sleep 2
 done
-echo ""
 echo "=================================="
 echo "REM-RESTORE-SNAPSHOT HAS COMPLETED"
 echo "=================================="
