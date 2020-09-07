@@ -56,21 +56,20 @@ echo "================================"
 echo "REM-RESTORE-SNAPSHOT HAS STARTED"
 echo "================================"
 latest_snapshot=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php | awk '{print $3}')
-latest_new_snapshot=$(echo $latest_snapshot)
 echo ""
 echo "Downloading Snapshot now..."
 echo ""
-curl -O https://www.geordier.co.uk/snapshots/$latest_new_snapshot
+curl -O https://remsnapshots.geordier.co.uk/snapshots/$latest_snapshot
 echo ""
-echo "Downloaded $latest_new_snapshot"
-gunzip $latest_new_snapshot
+echo "Downloaded $latest_snapshot"
+gunzip $latest_snapshot
 tar_file=$(ls *.tar | head -1)
 sudo tar -xvf $tar_file
 rm $tar_file
 mv /root/root/data/snapshots/*.bin $snapshots_folder/
 bin_file=$snapshots_folder/*.bin
 echo ""
-echo "Uncompressed $latest_new_snapshot"
+echo "Uncompressed $latest_snapshot"
 rm -rf $blocks_folder
 rm -rf $state_folder
 cd ~
