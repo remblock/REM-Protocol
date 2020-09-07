@@ -18,6 +18,8 @@ fi
 # CONFIGURATION VARIABLES                                                                            #
 #----------------------------------------------------------------------------------------------------#
 
+swap_auth=producer
+oracle_auth=producer
 producer=remblock21bp
 wallet_name=walletpass
 domain=rem2.remblock.io
@@ -127,7 +129,7 @@ echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# PRODUCER SETTINGS                                                            #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nproducer-name = $producer\nswap-authority = $producer@producer\noracle-authority = $producer@producer\nswap-signing-key = $bp_swap_key\noracle-signing-key = $bp_oracle_key\nsignature-provider = $bp_public_key=KEY:$bp_private_key\n" >> $config_file
+echo -e "\nproducer-name = $producer\nswap-authority = $producer@$swap_auth\noracle-authority = $producer@$oracle_auth\nswap-signing-key = $bp_swap_key\noracle-signing-key = $bp_oracle_key\nsignature-provider = $bp_public_key=KEY:$bp_private_key\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# REM PROTOCOL P2P PEER ADDRESSES                                              #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#\n" >> $config_file
