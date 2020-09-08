@@ -27,7 +27,7 @@ second_date=$(date +%s)
 # CHECK BLOCK CONDITION                                                                              #
 #----------------------------------------------------------------------------------------------------#
 
-last_remcli_block_date=$(remcli -u https://remchain.remme.io get table rem rem producers -L $producer -U $producer | grep 'last_block_time' | awk '{print $2}' | tr -d '"' | tr -d ',')
+last_remcli_block_date=$(remcli -u https://rem.remblock.io get table rem rem producers -L $producer -U $producer | grep 'last_block_time' | awk '{print $2}' | tr -d '"' | tr -d ',')
 last_block=$(remnodelogtime_to_date "$last_remcli_block_date")
 block_result=$(expr $second_date - $last_block)
 block_minute=$(expr $block_result / 60)
@@ -42,7 +42,7 @@ fi
 # CHECK ORACLE CONDITION                                                                             #
 #----------------------------------------------------------------------------------------------------#
 
-last_oracle_date=$(remcli -u https://remchain.remme.io get table rem.oracle rem.oracle pricedata -L $producer -U $producer | grep 'last_update' | awk '{print $2}' | tr -d '"')
+last_oracle_date=$(remcli -u https://rem.remblock.io get table rem.oracle rem.oracle pricedata -L $producer -U $producer | grep 'last_update' | awk '{print $2}' | tr -d '"')
 last_oracle=$(remnodelogtime_to_date "$last_oracle_date")
 oracle_result=$(expr $second_date - $last_oracle)
 if [[ $oracle_result -le "4000" ]]
