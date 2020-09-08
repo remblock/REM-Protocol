@@ -9,8 +9,8 @@
 #----------------------------------------------------------------------------------------------------#
 
 producer=remblock21bp
-telegram_chat_id=704178267
-telegram_chat_api=711425317:AAG5nKmZarIlFwhOLSlLN5tYxpKNxTu9iYo
+telegram_chat_id=
+telegram_chat_api=
 
 #----------------------------------------------------------------------------------------------------#
 # FUNCTION TO TRANSLATE THE TIME FORMAT FROM REMCLI FORMATE TO EPOCH TIME                            #
