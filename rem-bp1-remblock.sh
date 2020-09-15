@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #****************************************************************************************************#
-#                                       REM-BP1-REMBLOCK-SETUP                                       #
+#                                       REM-BP1-MAINNET-SETUP                                        #
 #****************************************************************************************************#
 
 #----------------------------------------------------------------------------------------------------#
@@ -23,10 +23,8 @@ wallet_name=walletpass
 domain=rem.remblock.io
 create_ssh_dir=/root/.ssh
 create_data_dir=/root/data
-state_dir=/root/data/state
 contact=contact@remblock.io
-blocks_dir=/root/data/blocks
-new_hostname=rem-bp1-remblock
+new_hostname=rem-bp1-mainnet
 create_config_dir=/root/config
 remnode_log_file=/root/remnode.log
 config_file=/root/config/config.ini
@@ -291,7 +289,7 @@ remcli wallet create -n $wallet_name --file $wallet_name
 #----------------------------------------------------------------------------------------------------#
 
 rm /root/rem-peer-list.ini
-rm /root/rem-bp1-remblock.sh
+rm /root/rem-bp1-mainnet.sh
 rm /root/rem-restore-snapshot.sh
 rm /root/remprotocol_0.4.2.amd64.deb
 
@@ -303,7 +301,7 @@ echo $ssh_public_key > ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
 sudo -S service sshd restart
 echo ""
-echo "===================================="
-echo "REM-BP1-REMBLOCK SETUP HAS COMPLETED"
-echo "===================================="
+echo "==================================="
+echo "REM-BP1-MAINNET SETUP HAS COMPLETED"
+echo "==================================="
 echo ""
