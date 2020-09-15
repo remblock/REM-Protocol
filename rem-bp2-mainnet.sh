@@ -204,6 +204,30 @@ do
 done
 
 #----------------------------------------------------------------------------------------------------#
+# INSTALLING APACHE WEB SERVER                                                                       #
+#----------------------------------------------------------------------------------------------------#
+
+sudo apt install apache2 -y
+sudo mkdir -p /var/www/$domain
+sudo chown -R $USER:$USER /var/www/$domain
+sudo chmod -R 755 /var/www/$domain
+echo -e "<VirtualHost *:80>
+    ProxyPreserveHost On
+    ProxyRequests Off
+    ServerName http://$domain
+    ServerAlias http://$domain
+    DocumentRoot /var/www/$domain
+    ProxyPass / http://localhost:8888/
+    ProxyPassReverse / http://localhost:8888/
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+</VirtualHost>" > /etc/apache2/sites-available/$domain.conf
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo a2ensite $domain.conf
+sudo a2dissite 000-default.conf
+sudo service apache2 restart
+
+#----------------------------------------------------------------------------------------------------#
 # INSTALLING UNCOMPLICATED FIREWALL                                                                  #
 #----------------------------------------------------------------------------------------------------#
 
