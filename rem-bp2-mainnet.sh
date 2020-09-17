@@ -35,10 +35,9 @@ config_file=/root/config/config.ini
 create_snapshot_dir=/root/data/snapshots
 bp_swap_key=
 bp_oracle_key=
-bp_public_key=EOS69CWuLnr9T1yvj1fQHy9sgTr2g7s87Xx2oKvnRR2kV6Dvsanxu
-bp_private_key=
 infura_link=
 cryptocompare=
+producer_private_key=
 ssh_public_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC5govVMkNP5HyBQ+DBWSbUe97qyKVzoI5s1lR+x1HCSdetS8dacN6e86eWaWNUQBBr6O0AttbXULqxvOBNF1GzWFw0T1jFr9lCtuz2Y06KGjJBHRHXopeSp6VHJr+BG4Q4l9fzguYO/EmQf9Y48eCXCs4eFkKE6mFlfGkNvRInpz6bbRvwYOFEEKiTyLXE6y1910dVrgLTd2P1kyh88aCwuF4GnexM4AsipzKpSCR3/s/gqxK4YpW8KsMBCdcQMYHZ2dgxoscudcp2l88hgnQJOriYOfjAnXSKttaGNRsER/hEcKGKJsRPELJZLCn+Ahv322GTsnTRMvipfXUtDqoTdpteM5lSz+GlUe6get+O501kTz9xF9aMK7fJdj264mzj8JfvxKsZFKfsDJvTkoIV8GPdzSk5fYr8W+lFzrNXKqHBeR8+WXdVYKIq8l6Y3NOCUcf6I+kYeHPKOAqkl8mSue2Q9GPGTn8z3tAg1ASuNxFQCqhcDCyF4RcZzVMfTO6tTe56Udt/mOr2QRb6C8+wI4YK9l6Un+S6MLAt1EQZyHEm/uI0Cv4SIvh2X4ksZLEgNNAcw63MxEOLnUiGacrhKG1v4qixtjaZITkc0M518J43FK8157q0DJwbMDQCOLCWyqoytRYNhfdNvTc6sefJBJOMqKbUwGxvrZue9T6BnQ== root@REMBLOCK"
 
 #----------------------------------------------------------------------------------------------------#
@@ -115,6 +114,38 @@ function get_user_answer_yn(){
 }
 
 #----------------------------------------------------------------------------------------------------#
+# CREATING REM MAINNET WALLET                                                                        #
+#----------------------------------------------------------------------------------------------------#
+
+remcli wallet create -n $wallet_name --file $wallet_name
+walletpass=$(cat $wallet_name)
+
+#----------------------------------------------------------------------------------------------------#
+# IMPORTING YOUR REM PRODUCER KEY                                                                    #
+#----------------------------------------------------------------------------------------------------#
+
+remcli wallet lock -n $wallet_name > /dev/null 2>&1
+remcli wallet unlock -n $wallet_name --password=$walletpass > /dev/null 2>&1
+remcli wallet import -n $wallet_name --private-key=$producer_private_key
+
+#----------------------------------------------------------------------------------------------------#
+# CREATING YOUR REM SIGNATURE KEY                                                                    #
+#----------------------------------------------------------------------------------------------------#
+
+remcli create key --file signature_key
+cp signature_key signature_key1
+echo "" >> rem_bp2_keys.txt
+echo "Signature Keys:" >> rem_bp2_keys.txt
+echo "" >> rem_bp2_keys.txt
+cat signature_key >> rem_bp2_keys.txt
+sudo -S sed -i "/^Private key: /s/Private key: //" signature_key1 && sudo -S sed -i "/^Public key: /s/Public key: //" signature_key1
+signature_public_key=$(head -n 2 signature_key1 | tail -1)
+signature_private_key=$(head -n 1 signature_key1 | tail -1)
+remcli wallet lock -n $wallet_name > /dev/null 2>&1
+remcli wallet unlock -n $wallet_name --password=$walletpass > /dev/null 2>&1
+remcli wallet import -n $wallet_name --private-key=$signature_private_key
+
+#----------------------------------------------------------------------------------------------------#
 # CONFIGURATION FILE (CONFIG/CONFIG.INI)                                                             #
 #----------------------------------------------------------------------------------------------------#
 
@@ -129,7 +160,7 @@ echo -e "\nmax-clients = 50\nchain-threads = 8\nsync-fetch-span = 200\neos-vm-oc
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# PRODUCER SETTINGS                                                            #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
-echo -e "\nproducer-name = $producer\nswap-authority = $producer@$swap_auth\noracle-authority = $producer@$oracle_auth\nswap-signing-key = $bp_swap_key\noracle-signing-key = $bp_oracle_key\nsignature-provider = $bp_public_key=KEY:$bp_private_key\n" >> $config_file
+echo -e "\nproducer-name = $producer\nswap-authority = $producer@$swap_auth\noracle-authority = $producer@$oracle_auth\nswap-signing-key = $bp_swap_key\noracle-signing-key = $bp_oracle_key\nsignature-provider = $signature_public_key=KEY:$signature_private_key\n" >> $config_file
 echo -e "#------------------------------------------------------------------------------#" >> $config_file
 echo -e "# REM PROTOCOL P2P PEER ADDRESSES                                              #" >> $config_file
 echo -e "#------------------------------------------------------------------------------#\n" >> $config_file
