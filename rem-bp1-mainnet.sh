@@ -310,7 +310,7 @@ sudo ./rem-restore-snapshot.sh
 remcli wallet create -n $wallet_name --file $wallet_name
 
 #----------------------------------------------------------------------------------------------------#
-# RESTORING REM BLOCKS                                                                               #
+# RESTORING REMNODE BLOCKS                                                                           #
 #----------------------------------------------------------------------------------------------------#
 
 sudo chmod u+x rem-restore-blocks.sh
