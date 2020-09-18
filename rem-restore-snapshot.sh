@@ -33,7 +33,7 @@ fi
 rm $snapshots_folder/*.bin 2> /dev/null
 
 #----------------------------------------------------------------------------------------------------#
-# GRACEFULLY STOP ORE-PROTOCOL                                                                       #
+# GRACEFULLY STOP REM-PROTOCOL                                                                       #
 #----------------------------------------------------------------------------------------------------#
 
 remnode_pid=$(pgrep remnode)
@@ -57,7 +57,7 @@ echo "DOWNLOADING OF REM SNAPSHOT HAS STARTED"
 echo "======================================="
 latest_snapshot=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php | awk '{print $3}')
 echo ""
-echo "Downloading Snapshot now..."
+echo "Downloading snapshot now..."
 echo ""
 curl -O https://remsnapshots.geordier.co.uk/snapshots/$latest_snapshot
 echo ""
