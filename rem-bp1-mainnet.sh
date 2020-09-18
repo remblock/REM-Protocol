@@ -20,7 +20,7 @@ fi
 
 producer=remblock21bp
 wallet_name=walletpass
-domain=rem.remblock.io
+domain=rem11.remblock.io
 create_ssh_dir=/root/.ssh
 create_data_dir=/root/data
 contact=contact@remblock.io
@@ -179,18 +179,18 @@ fi
 while [ : ]
 do
          echo ""
-	 read -p "PLEASE ENTER A RANDOM 5 DIGIT PORT NUMBER: " portnumber
+	 read -p "PLEASE ENTER A RANDOM 5 DIGIT PORT NUMBER: " port
 
-         if [[ ${#portnumber} -ne 5 ]]
+         if [[ ${#port} -ne 5 ]]
          then
                  printf "\nERROR: PORT NUMBER SHOULD BE EXACTLY 5 DIGITS.\n\n"
                  continue
-         elif [[ ! -z "${portnumber//[0-9]}" ]]
+         elif [[ ! -z "${port//[0-9]}" ]]
          then
                  printf "\nERROR: PORT NUMBER SHOULD CONTAIN NUMBERS ONLY.\n\n"
                  continue
          else
-                 sudo -S sed -i "/^#Port 22/s/#Port 22/Port $portnumber/" /etc/ssh/sshd_config && sed -i '/^PermitRootLogin/s/yes/without-password/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+                 sudo -S sed -i "/^#Port 22/s/#Port 22/Port $port/" /etc/ssh/sshd_config && sed -i '/^PermitRootLogin/s/yes/without-password/' /etc/ssh/sshd_config && sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
 		 echo ""
 		 break
          fi
@@ -230,7 +230,7 @@ sudo -S ufw limit ssh/tcp
 sudo -S ufw allow 443/tcp
 sudo -S ufw allow 8888/tcp
 sudo -S ufw allow 9876/tcp
-sudo -S ufw allow $portnumber/tcp
+sudo -S ufw allow $port/tcp
 sudo -S ufw logging on
 sudo -S ufw enable
 
@@ -297,7 +297,7 @@ wget https://github.com/Remmeauth/remprotocol/releases/download/0.4.2/remprotoco
 sudo apt install ./remprotocol_0.4.2.amd64.deb -y
 
 #----------------------------------------------------------------------------------------------------#
-# RESTORING FROM SNAPSHOT                                                                            #
+# RESTORING FROM REMNODE SNAPSHOT                                                                    #
 #----------------------------------------------------------------------------------------------------#
 
 sudo chmod u+x rem-restore-snapshot.sh
@@ -308,6 +308,8 @@ sudo ./rem-restore-snapshot.sh
 #----------------------------------------------------------------------------------------------------#
 
 remcli wallet create -n $wallet_name --file $wallet_name
+remcli wallet unlock -n $wallet_name --password=$walletpass > /dev/null 2>&1
+remcli wallet import -n $wallet_name --private-key=$producer_private_key
 
 #----------------------------------------------------------------------------------------------------#
 # RESTORING REMNODE BLOCKS                                                                           #
