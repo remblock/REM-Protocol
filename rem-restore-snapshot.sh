@@ -97,6 +97,7 @@ do
 	echo ""
 	sleep 2
 done
+rm ./rem-restore-snapshot.sh
 echo "=================================="
 echo "DOWNLOAD OF SNAPSHOT HAS COMPLETED"
 echo "=================================="
