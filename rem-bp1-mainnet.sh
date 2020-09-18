@@ -77,7 +77,7 @@ sudo snap install canonical-livepatch
 sudo snap install --classic certbot
 
 #----------------------------------------------------------------------------------------------------#
-# FETCHING REM PROTOCOL GENESIS.JSON AND SNAPSHOT                                                    #
+# FETCHING REM PROTOCOL GENESIS.JSON, BLOCKS AND SNAPSHOT                                            #
 #----------------------------------------------------------------------------------------------------#
 
 wget https://remchain.remme.io/genesis.json
