@@ -9,7 +9,7 @@
 #----------------------------------------------------------------------------------------------------#
 
 data_folder=/root/data
-log_file=/root/nodeos.log
+log_file=/root/remnode.log
 config_folder=/root/config
 state_folder=$data_folder/state
 blocks_folder=$data_folder/blocks
