@@ -74,6 +74,7 @@ mv /root/root/data/blocks/* $blocks_folder/
 rm /root/root/
 echo ""
 echo "Uncompressed $latest_blocks"
+rm ./rem-restore-blocks.sh
 echo ""
 echo "======================================="
 echo "DOWNLOADING OF REM BLOCKS HAS COMPLETED"
