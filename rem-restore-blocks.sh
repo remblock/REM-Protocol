@@ -71,6 +71,7 @@ rm -rf $blocks_folder
 rm -rf $state_folder
 mv /root/root/data/blocks/* $blocks_folder/
 mv /root/root/data/blocks/* $blocks_folder/
+rm /root/root/
 echo ""
 echo "Uncompressed $latest_blocks"
 echo ""
