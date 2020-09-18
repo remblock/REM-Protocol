@@ -52,9 +52,9 @@ fi
 #----------------------------------------------------------------------------------------------------#
 
 echo ""
-echo "================================"
-echo "REM-RESTORE-SNAPSHOT HAS STARTED"
-echo "================================"
+echo "==================================="
+echo "DOWNLOADING OF SNAPSHOT HAS STARTED"
+echo "==================================="
 latest_snapshot=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php | awk '{print $3}')
 echo ""
 echo "Downloading Snapshot now..."
@@ -98,6 +98,6 @@ do
 	sleep 2
 done
 echo "=================================="
-echo "REM-RESTORE-SNAPSHOT HAS COMPLETED"
+echo "DOWNLOAD OF SNAPSHOT HAS COMPLETED"
 echo "=================================="
 echo ""
