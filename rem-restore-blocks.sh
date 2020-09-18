@@ -56,11 +56,11 @@ echo ""
 echo "=================================="
 echo "DOWNLOADING REM BLOCKS HAS STARTED"
 echo "=================================="
-latest_blocks=$(curl -s https://info.remblock.io/ore/latestsnapshot.txt)
+latest_blocks=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php?type=blocks | awk ' { print $2 }')
 echo ""
 echo "Downloading blocks now..."
 echo ""
-curl -O https://info.remblock.io/ore/$latest_snapshot
+curl -O https://remsnapshots.geordier.co.uk/snapshots/blocks/$latest_blocks
 echo ""
 echo "Downloaded $latest_blocks"
 gunzip $latest_blocks
@@ -73,9 +73,6 @@ mv /root/root/data/blocks/* $blocks_folder/
 mv /root/root/data/blocks/* $blocks_folder/
 echo ""
 echo "Uncompressed $latest_blocks"
-cd ~
-remnode --config-dir $config_folder/ --data-dir $data_folder/ >> $log_file 2>&1 &
-sleep 6
 echo ""
 echo "===================================="
 echo "DOWNLOADING REM BLOCKS HAS COMPLETED"
