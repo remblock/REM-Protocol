@@ -84,10 +84,11 @@ sudo snap install canonical-livepatch
 sudo snap install --classic certbot
 
 #----------------------------------------------------------------------------------------------------#
-# FETCHING REM PROTOCOL GENESIS.JSON AND SNAPSHOT                                                    #
+# FETCHING REM PROTOCOL GENESIS.JSON, BLOCKS AND SNAPSHOT                                            #
 #----------------------------------------------------------------------------------------------------#
 
 wget https://remchain.remme.io/genesis.json
+wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-blocks.sh
 wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-snapshot.sh
 
 #----------------------------------------------------------------------------------------------------#
@@ -340,6 +341,13 @@ sudo chmod +x /etc/rc.local
 
 sudo chmod u+x rem-restore-snapshot.sh
 sudo ./rem-restore-snapshot.sh
+
+#----------------------------------------------------------------------------------------------------#
+# RESTORING REMNODE BLOCKS                                                                           #
+#----------------------------------------------------------------------------------------------------#
+
+sudo chmod u+x rem-restore-blocks.sh
+sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
