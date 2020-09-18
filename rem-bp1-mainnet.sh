@@ -314,7 +314,6 @@ remcli wallet create -n $wallet_name --file $wallet_name
 
 rm /root/rem-peer-list.ini
 rm /root/rem-bp1-mainnet.sh
-rm /root/rem-restore-snapshot.sh
 rm /root/remprotocol_0.4.2.amd64.deb
 
 #----------------------------------------------------------------------------------------------------#
