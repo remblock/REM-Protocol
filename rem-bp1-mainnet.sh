@@ -81,6 +81,7 @@ sudo snap install --classic certbot
 #----------------------------------------------------------------------------------------------------#
 
 wget https://remchain.remme.io/genesis.json
+wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-blocks.sh
 wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-snapshot.sh
 
 #----------------------------------------------------------------------------------------------------#
@@ -307,6 +308,13 @@ sudo ./rem-restore-snapshot.sh
 #----------------------------------------------------------------------------------------------------#
 
 remcli wallet create -n $wallet_name --file $wallet_name
+
+#----------------------------------------------------------------------------------------------------#
+# RESTORING REM BLOCKS                                                                               #
+#----------------------------------------------------------------------------------------------------#
+
+sudo chmod u+x rem-restore-blocks.sh
+sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
