@@ -347,7 +347,6 @@ sudo ./rem-restore-snapshot.sh
 
 rm /root/rem-peer-list.ini
 rm /root/rem-bp2-mainnet.sh
-rm /root/rem-restore-snapshot.sh
 rm /root/remprotocol_0.4.2.amd64.deb
 
 #----------------------------------------------------------------------------------------------------#
