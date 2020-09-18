@@ -53,9 +53,9 @@ fi
 #----------------------------------------------------------------------------------------------------#
 
 echo ""
-echo "=================================="
-echo "DOWNLOADING REM BLOCKS HAS STARTED"
-echo "=================================="
+echo "====================================="
+echo "DOWNLOADING OF REM BLOCKS HAS STARTED"
+echo "====================================="
 latest_blocks=$(curl -s https://remsnapshots.geordier.co.uk/snapshots/latestSnapshotType.php?type=blocks | awk ' { print $2 }')
 echo ""
 echo "Downloading blocks now..."
@@ -75,7 +75,7 @@ rm /root/root/
 echo ""
 echo "Uncompressed $latest_blocks"
 echo ""
-echo "===================================="
-echo "DOWNLOADING REM BLOCKS HAS COMPLETED"
-echo "===================================="
+echo "======================================="
+echo "DOWNLOADING OF REM BLOCKS HAS COMPLETED"
+echo "======================================="
 echo ""
