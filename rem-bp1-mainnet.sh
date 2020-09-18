@@ -319,7 +319,7 @@ sudo chmod u+x rem-restore-blocks.sh
 sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
-# REPLAY BLOCKCHIAN                                                                                  #
+# REPLAY REMCHAIN                                                                                    #
 #----------------------------------------------------------------------------------------------------#
 
 sudo remnode --config-dir ./config/ --data-dir ./data/ --replay-blockchain > $remnode_log_file 2>&1 &
