@@ -67,8 +67,8 @@ gunzip $latest_blocks
 tar_file=$(ls *.tar | head -1)
 sudo tar -xvf $tar_file
 rm $tar_file
-rm -rf $blocks_folder
-rm -rf $state_folder
+rm -rf $blocks_folder/*
+rm -rf $state_folder/*
 mv /root/root/data/blocks/* $blocks_folder/
 rm -r /root/root/
 echo ""
