@@ -70,8 +70,7 @@ rm $tar_file
 rm -rf $blocks_folder
 rm -rf $state_folder
 mv /root/root/data/blocks/* $blocks_folder/
-mv /root/root/data/blocks/* $blocks_folder/
-rm /root/root/
+rm -r /root/root/
 echo ""
 echo "Uncompressed $latest_blocks"
 rm ./rem-restore-blocks.sh
