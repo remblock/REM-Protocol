@@ -326,12 +326,12 @@ sudo remnode --config-dir ./config/ --data-dir ./data/ --replay-blockchain > $re
 
 while [ : ]
 do
-        block2=$(tail -n 1 remnode.log | awk '{print 9}')
+        block2=$(tail -n 1 $remnode_log_file | awk '{print 9}')
         if [ "$block1" >= "$block2" ]; then
                 break
         else
-                block1=$(tail -n 1 remnode.log | awk '{print $7}')
-                block2=$(tail -n 1 remnode.log | awk '{print $9}')
+                block1=$(tail -n 1 $remnode_log_file | awk '{print $7}')
+                block2=$(tail -n 1 $remnode_log_file | awk '{print $9}')
                 echo "Current replay block [${block1} | ${block2}]"
         fi
 
