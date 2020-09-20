@@ -74,6 +74,8 @@ rm -r /root/root/
 echo ""
 echo "Uncompressed $latest_blocks"
 echo ""
+remnode --config-dir $config_folder --data-dir $data_folder --replay-blockchain > $log_file 2>&1 &
+sleep 5
 while [ : ]
 do
        block1=$(tail -n 1 $log_file | awk '{print $7}')
