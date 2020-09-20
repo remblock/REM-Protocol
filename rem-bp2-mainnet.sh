@@ -22,7 +22,7 @@ swap_auth=producer
 oracle_auth=producer
 producer=remblock21bp
 wallet_name=walletpass
-domain=rem22.remblock.io
+domain=rem2.remblock.io
 create_ssh_dir=/root/.ssh
 create_data_dir=/root/data
 state_dir=/root/data/state
@@ -88,7 +88,6 @@ sudo snap install --classic certbot
 #----------------------------------------------------------------------------------------------------#
 
 wget https://remchain.remme.io/genesis.json
-wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-blocks.sh
 wget https://github.com/remblock/REM-Protocol/raw/master/rem-restore-snapshot.sh
 
 #----------------------------------------------------------------------------------------------------#
@@ -341,13 +340,6 @@ sudo chmod +x /etc/rc.local
 
 sudo chmod u+x rem-restore-snapshot.sh
 sudo ./rem-restore-snapshot.sh
-
-#----------------------------------------------------------------------------------------------------#
-# RESTORING REMNODE BLOCKS                                                                           #
-#----------------------------------------------------------------------------------------------------#
-
-sudo chmod u+x rem-restore-blocks.sh
-sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
