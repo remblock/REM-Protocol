@@ -20,7 +20,7 @@ fi
 
 producer=remblock21bp
 wallet_name=walletpass
-domain=rem11.remblock.io
+domain=rem.remblock.io
 create_ssh_dir=/root/.ssh
 create_data_dir=/root/data
 contact=contact@remblock.io
