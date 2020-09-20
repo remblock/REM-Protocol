@@ -141,7 +141,6 @@ remcli wallet import -n $wallet_name --private-key=$producer_private_key
 
 remcli create key --file signature_key
 cp signature_key signature_key1
-echo "" >> rem_bp2_keys.txt
 echo "Signature Keys:" >> rem_bp2_keys.txt
 echo "" >> rem_bp2_keys.txt
 cat signature_key >> rem_bp2_keys.txt
@@ -345,6 +344,8 @@ sudo ./rem-restore-snapshot.sh
 # CLEANUP INSTALLATION FILES                                                                         #
 #----------------------------------------------------------------------------------------------------#
 
+rm /root/signature_key
+rm /root/signature_key1
 rm /root/rem-peer-list.ini
 rm /root/rem-bp2-mainnet.sh
 rm /root/remprotocol_0.4.2.amd64.deb
@@ -356,7 +357,6 @@ rm /root/remprotocol_0.4.2.amd64.deb
 echo $ssh_public_key > ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
 sudo -S service sshd restart
-echo ""
 echo "==================================="
 echo "REM-BP2-MAINNET SETUP HAS COMPLETED"
 echo "==================================="
