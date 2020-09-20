@@ -350,12 +350,6 @@ sudo chmod u+x rem-restore-blocks.sh
 sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
-# REPLAY REMCHAIN                                                                                    #
-#----------------------------------------------------------------------------------------------------#
-
-sudo remnode --config-dir ./config/ --data-dir ./data/ --replay-blockchain > $remnode_log_file 2>&1 &
-
-#----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
 #----------------------------------------------------------------------------------------------------#
 
@@ -370,7 +364,6 @@ rm /root/remprotocol_0.4.2.amd64.deb
 echo $ssh_public_key > ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
 sudo -S service sshd restart
-echo ""
 echo "==================================="
 echo "REM-BP2-MAINNET SETUP HAS COMPLETED"
 echo "==================================="
