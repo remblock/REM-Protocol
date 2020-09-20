@@ -85,7 +85,7 @@ do
         echo "Current replay block [${block1} | ${block2}]"
        fi
        echo ""
-       sleep 2
+       sleep 5
 done
 rm ./rem-restore-blocks.sh
 echo ""
