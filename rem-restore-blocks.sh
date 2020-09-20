@@ -80,8 +80,8 @@ while [ : ]
 do
        block1=$(tail -n 1 $log_file | awk '{print $7}')
        block2=$(tail -n 1 $log_file | awk '{print $9}')
-       if [[ "$block1" -ge "$block2" ]]; then break
-       elif [[ "$block1" -eq "remnode" ]]; then break
+       if [[ $block1 -ge $block2 ]]; then break
+       elif [[ $block1 -eq "remnode" ]]; then break
        else
         echo "Current replay block [${block1} | ${block2}]"
        fi
