@@ -319,27 +319,6 @@ sudo chmod u+x rem-restore-blocks.sh
 sudo ./rem-restore-blocks.sh
 
 #----------------------------------------------------------------------------------------------------#
-# REPLAY REMCHAIN                                                                                    #
-#----------------------------------------------------------------------------------------------------#
-
-sudo remnode --config-dir ./config/ --data-dir ./data/ --replay-blockchain > $remnode_log_file 2>&1 &
-
-while [ : ]
-do
-        block2=$(tail -n 1 $remnode_log_file | awk '{print 9}')
-        if [ "$block1" >= "$block2" ]; then
-                break
-        else
-                block1=$(tail -n 1 $remnode_log_file | awk '{print $7}')
-                block2=$(tail -n 1 $remnode_log_file | awk '{print $9}')
-                echo "Current replay block [${block1} | ${block2}]"
-        fi
-
-        echo ""
-        sleep 2
-done
-
-#----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
 #----------------------------------------------------------------------------------------------------#
 
