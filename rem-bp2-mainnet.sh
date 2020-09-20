@@ -356,6 +356,7 @@ rm /root/remprotocol_0.4.2.amd64.deb
 echo $ssh_public_key > ~/.ssh/id_rsa.pub
 cat ~/.ssh/id_rsa.pub > ~/.ssh/authorized_keys
 sudo -S service sshd restart
+echo ""
 echo "==================================="
 echo "REM-BP2-MAINNET SETUP HAS COMPLETED"
 echo "==================================="
