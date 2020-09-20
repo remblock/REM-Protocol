@@ -318,6 +318,18 @@ remcli wallet import -n $wallet_name --private-key=$producer_private_key
 sudo chmod u+x rem-restore-blocks.sh
 sudo ./rem-restore-blocks.sh
 
+while [ : ]
+do
+       block1=$(tail -n 1 $remnode_log_file | awk '{print $7}')
+       block2=$(tail -n 1 $remnode_log_file | awk '{print $9}')
+       if [[ $block1 -ge $block2 ]]; then break
+       else
+        echo "Current replay block [${block1} | ${block2}]"
+       fi
+       echo ""
+       sleep 2
+done
+
 #----------------------------------------------------------------------------------------------------#
 # CLEANUP INSTALLATION FILES                                                                         #
 #----------------------------------------------------------------------------------------------------#
